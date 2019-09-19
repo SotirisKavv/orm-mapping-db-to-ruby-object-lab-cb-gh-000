@@ -69,14 +69,14 @@ class Student
     DB[:conn].execute(sql).collect {|row| self.new_from_db(row)}
   end
 
-  def self.first_X_students_in_grade_10(X)
+  def self.first_X_students_in_grade_10(x)
     sql = <<-SQL
       SELECT * FROM students
       WHERE grade = "10"
       LIMIT ?
     SQL
 
-    DB[:conn].execute(sql, X).collect {|row| self.new_from_db(row)}
+    DB[:conn].execute(sql, x).collect {|row| self.new_from_db(row)}
   end
 
   def self.first_student_in_grade_10
@@ -89,12 +89,12 @@ class Student
     DB[:conn].execute(sql).collect {|row| self.new_from_db(row)}[0]
   end
 
-  def self.all_students_in_grade_X(X)
+  def self.all_students_in_grade_X(x)
     sql = <<-SQL
       SELECT * FROM students
-      WHERE grade = X
+      WHERE grade = ?
     SQL
 
-    DB[:conn].execute(sql, X.to_s).collect {|row| self.new_from_db(row)}
+    DB[:conn].execute(sql, x.to_s).collect {|row| self.new_from_db(row)}
   end
 end
